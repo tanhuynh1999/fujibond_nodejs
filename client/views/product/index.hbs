@@ -1,0 +1,96 @@
+<div id="app" class="f-main">
+    <div class="row">
+        <div class="main-header">
+            <h4>Quản lý sản phẩm</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <!-- Basic Table starts -->
+            <div class="card">
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-sm-12 table-responsive">
+                            {{> category/header}} 
+                            <el-tabs v-model="activeCategory" @tab-click="handleClickCategory">
+                                <el-tab-pane v-for="item in listData.listTabsMain" :label="item.label" :name="item.name">
+                                    <label class="badge bg-danger">15 sản phẩm</label>
+                                    {{> category/filter}}
+                                    <el-table
+                                        ref="multipleTable"
+                                        :data="tableData"
+                                        style="width: 100%">
+                                            <el-table-column
+                                                type="selection"
+                                                width="55">
+                                            </el-table-column>
+                                            <el-table-column
+                                                label="STT"
+                                                type="index"
+                                                width="55">
+                                            </el-table-column>
+                                            <el-table-column
+                                                label="Hình ảnh"
+                                                width="100px">
+                                                <template slot-scope="scope">
+                                                    <img class="f-image" :src="scope.row.image" alt="" srcset="">
+                                                </template>
+                                            </el-table-column>
+                                            <el-table-column
+                                                label="Mã sản phẩm"
+                                                property="code">
+                                            </el-table-column>
+                                            <el-table-column
+                                                label="Tên sản phẩm"
+                                                property="name">
+                                            </el-table-column>
+                                            <el-table-column
+                                                label="Danh mục"
+                                                property="category">
+                                            </el-table-column>
+                                            <el-table-column
+                                                label="Ngày tạo"
+                                                property="datecreate">
+                                            </el-table-column>
+                                            <el-table-column
+                                                label="Ngày sửa"
+                                                property="datemodified">
+                                            </el-table-column>
+                                            <el-table-column
+                                                label="Tình trạng"
+                                                class="f-active">
+                                                <template slot-scope="scope">
+                                                    <el-switch v-model="scope.row.active"></el-switch>
+                                                </template>
+                                            </el-table-column>
+                                            <el-table-column
+                                                label="Lượt xem"
+                                                property="view">
+                                            </el-table-column>
+                                            <el-table-column
+                                                label="Hành động"
+                                                width="100px"
+                                                class="f-iconhover">
+                                                <template slot-scope="scope">
+                                                    <span @click="clickShowCategory(scope.row)">
+                                                        <i class="fa fa-eye h-f-17 cp" aria-hidden="true"></i> |
+                                                    </span>
+                                                    <i class="fa fa-edit h-f-17 cp" aria-hidden="true"></i> |
+                                                    <i class="fa fa-bell h-f-17 cp" aria-hidden="true"></i> |
+                                                    <i class="fa fa-comment h-f-17 cp" aria-hidden="true"></i> |
+                                                    <i class="fa fa-trash h-f-17 cp" aria-hidden="true"></i> 
+                                                </template>
+                                            </el-table-column>
+                                    </el-table>
+                                </el-tab-pane>
+                            </el-tabs>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{> category/dialog-details}}
+</div>
+
+<script src="js/product/product.js"></script>

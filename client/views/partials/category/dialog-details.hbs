@@ -1,0 +1,90 @@
+<el-dialog :title="name" :visible.sync="dialogShowCategory" class="f-show">
+    <el-tabs v-model="activeDetailsCategory" @tab-click="handleClick">
+        <el-tab-pane label="Chi tiết" name="details">
+            <div class="row">
+                <div class="col-lg-3">
+                    <img :src="image" alt="" srcset="" class="f-image">
+                    <hr>
+                    <div class="label-main">
+                        <label class="label label-inverse-default">
+                            Có <span class="text-danger">0</span> lần theo dõi
+                        </label>
+                        <label class="label label-inverse-default">
+                            Có <span class="text-danger">0</span> chú ý
+                        </label>
+                        <label class="label label-inverse-default">
+                            Có <span class="text-danger">0</span> lượt xem phía admin
+                        </label>
+                        <label class="label label-inverse-default">
+                            Có <span class="text-danger">0</span> lượt xem phía người dùng
+                        </label>
+
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h4 class="name">Keo Epoxy (Keo AB)</h4>
+                    <hr>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <span class="text-sub">Ngày tạo : </span>
+                            <label class="badge badge-inverse-default" v-text="datecreate"></label>
+                        </div>
+                        <div class="col-lg-6">
+                            <span class="text-sub">Ngày sửa : </span>
+                            <label class="badge badge-inverse-default" v-text="datecreate"></label>
+                        </div>
+                        <div class="col-lg-6">
+                            <span class="text-sub">Người tạo : </span>
+                            <label class="badge badge-inverse-default" v-text="usercreate"></label>
+                        </div>
+                        <div class="col-lg-6">
+                            <span class="text-sub">Người sửa : </span>
+                            <label class="badge badge-inverse-default" v-text="usermodified"></label>
+                        </div>
+                        <div class="col-lg-6">
+                            <span class="text-sub">Tình trạng : </span>
+                            <label :class="'badge bg-'+active_color" v-text="active_text"></label>
+                        </div>
+                        <div class="col-lg-6">
+                            <span class="text-sub">Theo dõi : </span>
+                            <label :class="'badge bg-'+follow_color" v-text="follow_text"></label>
+                        </div>
+                        <div class="col-lg-6">
+                            <span class="text-sub">Chú ý : </span>
+                            <label :class="'badge bg-'+note_color" v-text="note_text"></label>
+                        </div>
+                        <div class="col-lg-6">
+                            <span class="text-sub">Thùng rác : </span>
+                            <label class="badge bg-default">No</label>
+                        </div>
+                        <div class="col-lg-12">
+                            <hr>
+                            <b>Mô tả:</b>
+                            <p class="content">
+                                <i v-text="describe"></i>
+                            </p>
+                            <b class="mt-1">Nội dung:</b>
+                            <p class="content" v-text="content"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <h5>Lịch sử gần đây</h5>
+                    <div class="text-danger float-right"><i class="fa fa-arrow-right" aria-hidden="true"></i> Xem tất cả</div>
+                    <br>
+                    <el-timeline :reverse="reverse">
+                        <el-timeline-item
+                        v-for="(item, index) in listData.activitiesCategory"
+                        :key="index"
+                        :timestamp="item.timestamp">
+                            <span v-text="item.content"></span>
+                        </el-timeline-item>
+                    </el-timeline>
+                </div>
+            </div>
+        </el-tab-pane>
+        <el-tab-pane label="Hình ảnh" name="images">Hình ảnh</el-tab-pane>
+        <el-tab-pane label="Lịch sử" name="history">Lịch sử</el-tab-pane>
+        <el-tab-pane label="Thống kê" name="statistical">Thống kê</el-tab-pane>
+    </el-tabs>
+</el-dialog>

@@ -1,6 +1,6 @@
 class HomeController{
     getHome = (req, res) => {
-        res.send('Hello World!')
+        res.render('home')
     }
 }
 

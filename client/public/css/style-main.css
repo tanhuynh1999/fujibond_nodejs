@@ -1,0 +1,62 @@
+:root{
+
+}
+
+*{
+
+}
+
+
+*html{
+
+}
+
+/*Common*/
+.text-center{
+    text-align: center;
+}
+
+.float-right{
+    float: right;
+}
+
+.w-100{
+    width: 100% !important;
+}
+
+.mt-1{
+    margin-top: 1%;
+}
+
+
+/*f-main*/
+.f-main .f-image{
+    height: 80px;
+    border: 10%;
+}
+
+.h-f-17:hover{
+    font-size: 17px;
+}
+
+.cp{
+    cursor: pointer;
+}
+
+.f-btn-confirm{
+    height: 32px;
+    border-radius: 10px 10px 10px 10px;
+}
+
+.f-filter .dropdown-menu {
+    left: -129px;
+}
+
+.f-show .f-image{
+    width: 100%;
+    height: 200px;
+}
+
+.f-show .el-dialog {
+    width: 70%;
+}

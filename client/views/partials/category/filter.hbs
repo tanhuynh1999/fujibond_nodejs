@@ -1,0 +1,45 @@
+<el-row :gutter="20">
+  <el-col :span="6">
+      <el-input
+        placeholder="Tìm kiếm..."
+        v-model="search"
+        clearable
+        size="small">
+    </el-input>
+  </el-col>
+  <el-col :span="4">
+      <el-select 
+            v-model="valueAction" 
+            clearable 
+            placeholder="Tuỳ chọn hoạt động"
+            size="small"
+            class="w-100">
+        <el-option
+        v-for="item in listData.optionsAction"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+        </el-option>
+    </el-select>
+  </el-col>
+  <el-col :span="2">
+      <button type="button" class="btn btn-success waves-effect waves-light f-btn-confirm">Xác nhận</button>
+  </el-col>
+  <el-col :span="12" class="f-filter">
+        <div class="btn-group dropdown-split-warning float-right">
+            <button type="button" class="btn btn-warning">
+                <i class="fa fa-filter" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="btn btn-warning dropdown-toggle dropdown-toggle-split waves-effect waves-light" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Toggle Warning</span>
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item waves-effect waves-light" href="#">Mới nhất</a>
+                <a class="dropdown-item waves-effect waves-light" href="#">Cũ nhất</a>
+                <a class="dropdown-item waves-effect waves-light" href="#">Hôm nay</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item waves-effect waves-light" href="#">Lọc nâng cao</a>
+            </div>
+        </div>
+  </el-col>
+</el-row>
