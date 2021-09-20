@@ -11,11 +11,11 @@
                 <div class="card-block">
                     <div class="row">
                         <div class="col-sm-12 table-responsive">
-                            {{> category/header}} 
-                            <el-tabs v-model="activeCategory" @tab-click="handleClickCategory">
+                            {{> product/header}} 
+                            <el-tabs v-model="activeProduct" @tab-click="handleClickProduct">
                                 <el-tab-pane v-for="item in listData.listTabsMain" :label="item.label" :name="item.name">
                                     <label class="badge bg-danger">15 sản phẩm</label>
-                                    {{> category/filter}}
+                                    {{> product/filter}}
                                     <el-table
                                         ref="multipleTable"
                                         :data="tableData"
@@ -72,7 +72,7 @@
                                                 width="100px"
                                                 class="f-iconhover">
                                                 <template slot-scope="scope">
-                                                    <span @click="clickShowCategory(scope.row)">
+                                                    <span @click="clickShowProduct(scope.row)">
                                                         <i class="fa fa-eye h-f-17 cp" aria-hidden="true"></i> |
                                                     </span>
                                                     <i class="fa fa-edit h-f-17 cp" aria-hidden="true"></i> |
@@ -90,7 +90,8 @@
             </div>
         </div>
     </div>
-    {{> category/dialog-details}}
+    {{> product/dialog-details}}
+    {{> product/dialog-create}}
 </div>
 
 <script src="js/product/product.js"></script>

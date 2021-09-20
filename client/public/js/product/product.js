@@ -55,7 +55,7 @@ var Main = {
                         value: 'nore-action'
                     }
                 ],
-                activitiesCategory: [
+                activitiesProduct: [
                     {
                         content: 'Tấn huỳnh đã thay đổi nội dung',
                         timestamp: '2018-04-15'
@@ -80,14 +80,65 @@ var Main = {
                         content: 'Tấn huỳnh đã ghi chú 1 nội dung',
                         timestamp: '2018-04-15'
                     }
+                ],
+                optionsCategory: [
+                    {
+                        value: 'Keo cho ngành gỗ',
+                        label: 'Keo cho ngành gỗ'
+                    },
+                    {
+                        value: 'Các sản phẩm từ giấy',
+                        label: 'Các sản phẩm từ giấy'
+                    }
                 ]
             },
-            activeCategory: 'index',
-            activeDetailsCategory: 'details',
+            productForm: {
+                name: '',
+                image: [],
+                code: '',
+                category: [],
+                active: true,
+                view: 1,
+                describe: '',
+                content: '',
+            },
+            productValidate: {
+                name: [
+                    { 
+                        required: true, 
+                        message: 'Vui lòng nhập tên sản phẩm', 
+                        trigger: 'change' 
+                    },
+                    {
+                        max: 200, 
+                        message: 'Bạn đã nhập quá số lượng từ cho phép', 
+                        trigger: 'change' 
+                    }
+                ],
+                code: [
+                    {
+                        max: 15, 
+                        message: 'Bạn đã nhập quá số lượng từ cho phép', 
+                        trigger: 'change' 
+                    }
+                ],
+                describe: [
+                    {
+                        max: 500, 
+                        message: 'Bạn đã nhập quá số lượng từ cho phép', 
+                        trigger: 'change' 
+                    }
+                ]
+            },
+            activeProduct: 'index',
+            activeDetailsProduct: 'details',
             search: '',
             valueAction: '',
-            dialogShowCategory: false,
-            reverse: true
+            dialogShowProduct: false,
+            dialogCreateProduct: false,
+            reverse: true,
+            loading: false,
+            labelPositionTop: 'top'
         }
     },
     mounted() {
@@ -97,10 +148,10 @@ var Main = {
 
     },
     methods: {
-        handleClickCategory()
+        handleClickProduct()
         {
-            console.log(this.activeCategory);
-            if(this.activeCategory == "bin")
+            console.log(this.activeProduct);
+            if(this.activeProduct == "bin")
             {
                 this.bin = true;
                 this.tableData.bin = true;
@@ -109,10 +160,15 @@ var Main = {
                 console.log('!!!');
             }
         },
-        clickShowCategory(item)
+        handleRemove(file, fileList) {
+            console.log(file, fileList);
+        },
+        handlePreview(file) {
+            console.log(file);
+        },
+        clickShowProduct(item)
         {
-            this.dialogShowCategory = true;
-            
+            this.dialogShowProduct = true;
             this.name = item.name;
             this.image = item.image;
             this.code = item.code;
@@ -134,6 +190,43 @@ var Main = {
             this.active_text = item.active ? 'Hoạt động' : 'Không hoạt động';
             this.follow_text = item.follow ? 'Đang theo dõi' : 'Không theo dõi';
             this.note_text = item.note ? 'Đang chú ý' : 'Không có chú ý';
+        },
+        clickCreateProduct()
+        {
+            this.dialogCreateProduct = true;
+            this.title = 'Thêm sản phẩm mới';
+            console.log('!!!');
+        },
+        createProduct(productForm)
+        {
+            let that = this;
+            that.$refs[productForm].validate((valid) => {
+                if (valid) {
+                    console.log(this.productForm);
+                } 
+                else {
+                  console.log('error submit!!');
+                  return false;
+                }
+            });
+        },
+        fileUpload(productForm)
+        {
+            const preview = document.getElementById("myImg");
+            const file = document.querySelector('input[type=file]').files[0];
+            const reader = new FileReader();
+            console.log(file);
+
+            reader.addEventListener("load", function () {
+                // convert image file to base64 string
+                preview.src = reader.result;
+              }, false);
+            
+              if (file) {
+                reader.readAsDataURL(file);
+              }
+              
+
         }
     }
 };

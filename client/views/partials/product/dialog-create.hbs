@@ -1,0 +1,103 @@
+<el-dialog :title="title" :visible.sync="dialogCreateProduct" class="f-create">
+    <div class="row">
+        <div class="col-lg-12">
+            <el-button type="info" 
+                plain size="mini" 
+                round 
+                class="float-right ml-1"><i class="fa fa-question-circle" aria-hidden="true"></i> Hướng dẫn</el-button>
+            <el-button type="info" 
+                plain size="mini" 
+                round 
+                class="float-right ml-1"><i class="fa fa-upload" aria-hidden="true"></i> Tải lên</el-button>
+            <el-button type="info" 
+                plain size="mini" 
+                round 
+                class="float-right ml-1"><i class="fas fa-blog"></i> Thêm API</el-button>
+            <el-button type="info" 
+                plain size="mini" 
+                round 
+                class="float-right ml-1"><i class="fa fa-cog" aria-hidden="true"></i> Cài đặt</el-button>
+        </div>
+    </div>
+    <el-form :label-position="labelPositionTop" :model="productForm" :rules="productValidate" ref="productForm" label-width="120px" class="demo-ruleForm">
+        <div class="row">
+            <div class="col-lg-4">
+                <b><i class="fa fa-image" aria-hidden="true"></i> Ảnh minh hoạ</b>
+                <el-input v-model="productForm.image"
+                            type="file"
+                            class="imageProduct"
+                            @change="fileUpload('productForm')"
+                            multiple></el-input>
+                <center class="mt-2">
+                    <img id="myImg" src="images/noimage.jpg" class="rounded float-left f-image" alt="...">
+                </center>
+                <br><br>
+                <b><i class="fa fa-images" aria-hidden="true"></i> Slider Ảnh</b>
+                <el-upload class="upload-demo"
+                        action="https://jsonplaceholder.typicode.com/posts/"
+                        :on-preview="handlePreview"
+                        :on-remove="handleRemove"
+                        :file-list="fileList"
+                        list-type="picture">
+                        <el-button size="small" type="primary">Bỏ ảnh vào đây</el-button>
+                        <div slot="tip" class="el-upload__tip">Ảnh nên là png/jpg và kích thước không quá 500kb</div>
+                </el-upload>
+            </div>
+            <div class="col-lg-8">
+                <el-form-item label="Mã sản phẩm" prop="code">
+                  <el-input v-model="productForm.code"
+                            placeholder="Vui lòng nhập mã sản phẩm"
+                            maxlength="15"
+                            show-word-limit></el-input>
+                </el-form-item>
+                <el-form-item label="Tên sản phẩm" prop="name">
+                    <el-input v-model="productForm.name"
+                              placeholder="Vui lòng nhập tên sản phẩm"
+                              maxlength="200"
+                              show-word-limit></el-input>
+                </el-form-item>
+                <el-form-item label="Danh mục sản phẩm">
+                    <el-select v-model="productForm.category" 
+                               multiple 
+                               placeholder="Vui lòng chọn danh mục"
+                               class="w-100">
+                        <el-option
+                          v-for="item in listData.optionsCategory"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="Mô tả sản phẩm" prop="describe">
+                    <el-input type="textarea" 
+                              v-model="productForm.describe" 
+                              placeholder="Vui lòng nhập mô tả"
+                              maxlength="500"
+                              show-word-limit></el-input>
+                </el-form-item>
+                <el-form-item label="Nội dung chi tiết">
+                    <el-input type="textarea" 
+                              v-model="productForm.content" 
+                              placeholder="Vui lòng nhập nội dung sản phẩm"></el-input>
+                </el-form-item>
+                <el-form-item label="Lượt xem">
+                    <el-input-number v-model="productForm.view" 
+                                     controls-position="right" 
+                                     :min="1"></el-input-number>
+                </el-form-item>
+                <el-form-item label="Tình trạng">
+                    <el-switch
+                        v-model="productForm.active"
+                        active-text="Kích hoạt"
+                        inactive-text="Huỷ kích hoạt">
+                      </el-switch>
+                </el-form-item>
+                <el-form-item class="mt-2">
+                    <el-button type="primary" @click="createProduct('productForm')">Thêm sản phẩm</el-button>
+                    <el-button >Làm mới</el-button>
+                </el-form-item>
+            </div>
+        </div>
+    </el-form>
+</el-dialog>
